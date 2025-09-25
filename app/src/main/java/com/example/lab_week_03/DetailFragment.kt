@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 
 // Optional args (kalau nggak dipakai bisa dihapus)
 private const val ARG_PARAM1 = "param1"
@@ -19,6 +21,8 @@ class DetailFragment : Fragment() {
         get() = view?.findViewById(R.id.coffee_title)
     private val coffeeDesc: TextView?
         get() = view?.findViewById(R.id.coffee_desc)
+    private val btnBack: Button?
+        get() = view?.findViewById(R.id.btn_back)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,11 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val coffeeId = arguments?.getInt(COFFEE_ID, 0) ?: 0
         setCoffeeData(coffeeId)
+
+        // Setup back button
+        btnBack?.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     fun setCoffeeData(id: Int) {
@@ -57,6 +66,15 @@ class DetailFragment : Fragment() {
                 coffeeTitle?.text = getString(R.string.latte_title)
                 coffeeDesc?.text = getString(R.string.latte_desc)
             }
+            // Tambahkan case untuk coffee baru
+            R.id.cappuccino -> {
+                coffeeTitle?.text = getString(R.string.cappuccino_title)
+                coffeeDesc?.text = getString(R.string.cappuccino_desc)
+            }
+            R.id.espresso -> {
+                coffeeTitle?.text = getString(R.string.espresso_title)
+                coffeeDesc?.text = getString(R.string.espresso_desc)
+            }
         }
     }
 
@@ -69,6 +87,4 @@ class DetailFragment : Fragment() {
                 }
             }
     }
-
-
 }

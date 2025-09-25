@@ -14,5 +14,11 @@ extraction.)</string>
 espresso with steamed milk and only a little milk foam poured over it. Serve in a
 latte glass or a coffee cup. Flavored syrup can be added.</string>
 
+    <string name="cappuccino_title">CAPPUCINO</string>
+    <string name="cappuccino_desc">A coffee drink made with espresso and hot milk, topped with steamed milk foam</string>
+
+    <string name="espresso_title">ESPRESSO</string>
+    <string name="espresso_desc">A concentrated form of coffee served in small, strong shots</string>
+
     <string name="coffee_list">Coffee List</string>
 </resources>
