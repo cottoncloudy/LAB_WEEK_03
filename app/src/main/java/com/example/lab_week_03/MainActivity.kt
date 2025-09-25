@@ -23,15 +23,26 @@ class MainActivity : AppCompatActivity(), CoffeeListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // === Tambahan untuk dynamic fragment ===
+        if (savedInstanceState == null) {
+            val listFragment = ListFragment()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, listFragment) // fragment_container ada di XML
+                .commit()
+        }
     }
 
     override fun onSelected(id: Int) {
-        val detailFragment = supportFragmentManager
-            .findFragmentById(R.id.fragment_detail) as DetailFragment
-        detailFragment.setCoffeeData(id)
+        // === Dynamic ganti ke DetailFragment ===
+        val detailFragment = DetailFragment.newInstance(id)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, detailFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
-    // Lifecycle logging
+    // Lifecycle logging (biar tetap ada)
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart")
