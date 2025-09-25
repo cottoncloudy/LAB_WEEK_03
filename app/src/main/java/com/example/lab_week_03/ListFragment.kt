@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController   // ✅ Tambahkan ini
+import androidx.navigation.fragment.findNavController
 
 class ListFragment : Fragment() {
 
@@ -37,7 +37,7 @@ class ListFragment : Fragment() {
                 val fragmentBundle = Bundle()
                 fragmentBundle.putInt(COFFEE_ID, coffee.id)
 
-                // ✅ Navigasi ke DetailFragment lewat nav_graph
+                // Navigasi ke DetailFragment lewat nav_graph
                 findNavController().navigate(
                     R.id.action_listFragment_to_detailFragment,
                     fragmentBundle
