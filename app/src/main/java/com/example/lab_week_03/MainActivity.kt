@@ -1,74 +1,21 @@
 package com.example.lab_week_03
 
-import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.fragment.app.FragmentContainerView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.activity.enableEdgeToEdge
 
-interface CoffeeListener {
-    fun onSelected(id: Int)
-}
-
-class MainActivity : AppCompatActivity(), CoffeeListener {
-
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById<FragmentContainerView>(R.id.fragment_container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // === Tambahan untuk dynamic fragment ===
-        if (savedInstanceState == null) {
-            val listFragment = ListFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, listFragment) // fragment_container ada di XML
-                .commit()
-        }
-    }
-
-    override fun onSelected(id: Int) {
-        // === Dynamic ganti ke DetailFragment ===
-        val detailFragment = DetailFragment.newInstance(id)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, detailFragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
-    // Lifecycle logging (biar tetap ada)
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
-    }
-
-    companion object {
-        private const val TAG = "MainActivity"
     }
 }
